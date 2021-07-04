@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import Book from './Book';
+import bookList from '../assets/books'
 
 class MainComponent extends Component {
     state = {
-        books: [
-            { id: 1, bookName: "1984", writer: "George Orwell" },
-            { id: 2, bookName: "The Da Vonci Code", writer: "Dan Brown" },
-            { id: 3, bookName: "Metmorphosis", writer: "Franz Kafka" }
-        ],
+        books: bookList,
         showBooks: true
     };
 
