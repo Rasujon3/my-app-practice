@@ -6,20 +6,21 @@ import './App.css';
 class App extends Component {
   state = {
     books: [
-      { bookName: "1984", writer: "George Orwell" },
-      { bookName: "The Da Vonci Code", writer: "Dan Brown" },
-      { bookName: "The alchemist", writer: "Paulo Coelho" }
+      { id: 1, bookName: "1984", writer: "George Orwell" },
+      { id: 2, bookName: "The Da Vonci Code", writer: "Dan Brown" },
+      { id: 3, bookName: "Metmorphosis", writer: "Franz Kafka" }
     ],
   };
 
-  changeWithInputChange = (event) => {
-    this.setState({
-      books: [
-        { id: 1, bookName: event.target.value, writer: "George Orwell" },
-        { id: 2, bookName: "The Da Vonci Code", writer: "Dan Brown" },
-        { id: 3, bookName: "Metmorphosis", writer: "Franz Kafka" }
-      ],
-    });
+  changeWithInputState = (event, index) => {
+    const book = {
+      ...this.state.books[index]
+    }
+    book.bookName = event.target.value;
+    const books = [...this.state.books];
+    books[index] = book;
+
+    this.setState({ books: books });
   }
 
   deleteBookState = (index) => {
@@ -50,6 +51,7 @@ class App extends Component {
           // delete={this.deleteBookState.bind(this,index)}
           delete={() => this.deleteBookState(index)}
           key={book.id}
+          inputName={(event) => this.changeWithInputState(event, index)}
         />
       );
     })
