@@ -15,9 +15,9 @@ class App extends Component {
   changeWithInputChange = (event) => {
     this.setState({
       books: [
-        { bookName: event.target.value, writer: "George Orwell" },
-        { bookName: "The Da Vonci Code", writer: "Dan Brown" },
-        { bookName: "Metmorphosis", writer: "Franz Kafka" }
+        { id: 1, bookName: event.target.value, writer: "George Orwell" },
+        { id: 2, bookName: "The Da Vonci Code", writer: "Dan Brown" },
+        { id: 3, bookName: "Metmorphosis", writer: "Franz Kafka" }
       ],
     });
   }
@@ -49,6 +49,7 @@ class App extends Component {
           bookName={book.writer}
           // delete={this.deleteBookState.bind(this,index)}
           delete={() => this.deleteBookState(index)}
+          key={book.id}
         />
       );
     })
