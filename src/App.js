@@ -10,18 +10,7 @@ class App extends Component {
       { bookName: "The Da Vonci Code", writer: "Dan Brown" },
       { bookName: "The alchemist", writer: "Paulo Coelho" }
     ],
-    otherPropos: "I am some other Props",
   };
-
-  changeBookState = (newBookName) => {
-    this.setState({
-      books: [
-        { bookName: newBookName, writer: "George Orwell" },
-        { bookName: "The Da Vonci Code", writer: "Dan Brown" },
-        { bookName: "Metmorphosis", writer: "Franz Kafka" }
-      ],
-    });
-  }
 
   changeWithInputChange = (event) => {
     this.setState({
@@ -30,6 +19,16 @@ class App extends Component {
         { bookName: "The Da Vonci Code", writer: "Dan Brown" },
         { bookName: "Metmorphosis", writer: "Franz Kafka" }
       ],
+    });
+  }
+
+  deleteBookState = (index) => {
+    // const books = this.state.books.splice();
+    // const books = this.state.books.map(item => item);
+    const books = [...this.state.books];
+    books.splice(index, 1); // delete specfic book
+    this.setState({
+      books: books
     });
   }
 
@@ -43,11 +42,13 @@ class App extends Component {
 
     // const bookState = this.state.books;
 
-    const books = this.state.books.map((book) => {
+    const books = this.state.books.map((book, index) => {
       return (
         <Book
           bookName={book.bookName}
           bookName={book.writer}
+          // delete={this.deleteBookState.bind(this,index)}
+          delete={() => this.deleteBookState(index)}
         />
       );
     })
@@ -57,10 +58,7 @@ class App extends Component {
 
     return (
       <div className="App">
-
         <h1 style={style}>Book List</h1>
-        <button onClick={() => this.changeBookState("Nineteen Eithty-Four")}>Change State</button>
-        <input type="text" onChange={this.changeWithInputChange} />
         {books}
 
       </div>
